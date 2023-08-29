@@ -2,13 +2,9 @@
 cmake_minimum_required(VERSION 3.15)
 include(cmake/version.cmake)
 
-option(MSDFGEN_CORE_ONLY "Only build the core library with no dependencies" OFF)
-option(MSDFGEN_BUILD_STANDALONE "Build the msdfgen standalone executable" ON)
-option(MSDFGEN_USE_VCPKG "Use vcpkg package manager to link project dependencies" OFF)
 option(MSDFGEN_USE_OPENMP "Build with OpenMP support for multithreaded code" OFF)
 option(MSDFGEN_USE_SKIA "Build with the Skia library" OFF)
-option(MSDFGEN_INSTALL "Generate installation target" OFF)
-option(MSDFGEN_DYNAMIC_RUNTIME "Link dynamic runtime library instead of static" OFF)
+option(MSDFGEN_DYNAMIC_RUNTIME "Link dynamic runtime library instead of static" On)
 option(BUILD_SHARED_LIBS "Generate dynamic library files instead of static" OFF)
 
 
