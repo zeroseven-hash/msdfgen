@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.15)
 include(cmake/version.cmake)
 
-option(MSDFGEN_USE_OPENMP "Build with OpenMP support for multithreaded code" OFF)
+#option(MSDFGEN_USE_OPENMP "Build with OpenMP support for multithreaded code" OFF)
 option(MSDFGEN_USE_SKIA "Build with the Skia library" OFF)
 option(MSDFGEN_DYNAMIC_RUNTIME "Link dynamic runtime library instead of static" On)
 option(BUILD_SHARED_LIBS "Generate dynamic library files instead of static" OFF)
@@ -61,12 +61,15 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT m
 
 
 
-if(MSDFGEN_USE_OPENMP)
-    # Note: Clang doesn't support OpenMP by default...
-    find_package(OpenMP REQUIRED C  OMPONENTS CXX)
+
+# Note: Clang doesn't support OpenMP by default...
+find_package(OpenMP REQUIRED)
+if(OpenMP_CXX_FOUND)
+    message("----------------FIND OPENMP----------------------------")
     target_compile_definitions(msdfgen-core PUBLIC MSDFGEN_USE_OPENMP)
     target_link_libraries(msdfgen-core PUBLIC OpenMP::OpenMP_CXX)
 endif()
+
 
 if(BUILD_SHARED_LIBS AND WIN32)
     target_compile_definitions(msdfgen-core PRIVATE "MSDFGEN_PUBLIC=__declspec(dllexport)")
